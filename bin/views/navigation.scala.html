@@ -1,0 +1,55 @@
+@()
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Đăng ký luận văn</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  </head>
+  <body>
+<nav class="navbar navbar-inverse" id="navigation">
+    <div class="navbar-header">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                        Quản Lý Luận Văn Tốt Nghiệp</a>
+                  </div>
+  		</div>
+
+             <ul class="nav navbar-nav">
+               
+                  <li><a href="#">Liên hệ</a></li>
+  			  <ul class="nav navbar-nav navbar-right">
+               @if(session.get("email") == null) {
+  				<p class="text-right">
+				<div class="container">
+                      <li><a href="@routes.Application.login()">
+                      <span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a></li>   </p>
+                  } else {
+
+
+  <div class="container">
+
+      <div class="col-md-3">
+      <ul class="nav navbar-nav">
+
+           	<li class="dropdown">
+              <a href="#" class="nav navbar-nav" data-toggle="dropdown">@session.get("email") <b class="caret"> </b> </a>
+            <ul class="dropdown-menu">
+
+              <li><a href="#">Trợ giúp</a></li>
+  			<li><a href="#">Liên hệ</a></li>
+  			   <li><a href="#">Góp ý</a></li>
+                 <li><a href="@routes.Application.logout()"> Đăng xuất</a></li>
+  		 }
+   </u/> </li>
+        </ul>
+      </div>
+
+  </nav>
+  </div>
+  </div>
+  </body>
+  </html>
+<div class="jumbotron">

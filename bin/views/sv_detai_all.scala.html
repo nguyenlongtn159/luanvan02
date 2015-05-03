@@ -1,0 +1,67 @@
+@(currentPage: com.avaje.ebean.Page[Detai],chanvai: UserAccount)
+
+@import helper._
+
+@main("Đề tài") {
+<script>
+  function del(urlToDelete) {
+    $.ajax ( {
+      url : urlToDelete,
+      type : 'DELETE',
+      success : function ( results ) {
+        // Refresh the page
+        location.reload ( ) ;
+      }
+    } ) ;
+  }
+  </script>
+  <div id="pagination" class="pagination">
+   @if(currentPage.hasPrev) {
+      <li>
+         <a href="@routes.Students.list(currentPage.getPageIndex - 1,chanvai)">
+            &larr;
+         </a>
+      </li>
+   } else {
+     <li class="disabled"><a>&larr;</a></li>
+   }
+     <li class="active">
+        <a>@currentPage.getDisplayXtoYofZ(" - ", " / ")</a>
+     </li>
+   @if(currentPage.hasNext) {
+     <li>
+      <a href="@routes.Students.list(currentPage.getPageIndex + 1,chanvai)">&rarr;</a>
+     </li>
+   } else {
+     <li class="disabled"><a>&rarr;</a></li>
+   }
+</div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Đề tài</th>
+		<th>Đăng ký</th>
+		<th>Giảng viên hướng dẫn</th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+    @for(mDetai <- currentPage.getList()) {
+      <tr>
+        <td>@mDetai.id</td>
+        <td>@mDetai.name</td>
+		<td><a onclick="del('@routes.Students.Dangky(chanvai,mDetai)')">@if(chanvai.detai != null && chanvai.detai.id == mDetai.id){ 
+		        <p>Đã đăng ký</p> 
+			} else {
+      			<p>Đăng ký</p> 
+			}</a></td>
+		<td><a href="@routes.Students.gv_list(0,chanvai,mDetai.id)">Xem</a></td>
+      </tr>
+    }
+    </tbody>
+  </table>
+  <a class="btn" href="@routes.Students.details(chanvai)">BACK</a>
+  <br><center><span class="glyphicon glyphicon-home" aria-hidden="true"></span><a href="@routes.Students.details(chanvai)">TRANG CHỦ</a><span class="glyphicon glyphicon-home" aria-hidden="true"></span></center>
+ }

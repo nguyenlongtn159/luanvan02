@@ -1,0 +1,27 @@
+@(account: UserAccount)
+ 
+@main("Quản lý luận văn cao học") {
+<script>
+  function del(urlToDelete) {
+    $.ajax ( {
+      url : urlToDelete,
+      type : 'DELETE',
+      success : function ( results ) {
+        // Refresh the page
+        location.reload ( ) ;
+      }
+    } ) ;
+  }
+  </script>
+  <h2>Giáo vụ quản lý luận văn</h2>
+  <h3>Chào mừng bạn @account.name<h3>
+  <a href="@routes.Managers.show(account,account)" class="btn">Thông tin cá nhân</a></br></br>
+  <a onclick="del('@routes.Managers.Start()')" class="btn btn-primary">@if(!account.getCheck_dangky){ 
+		        <p>Bắt đầu đăng ký</p> 
+			} else {
+      			<p>Kết thúc đăng ký</p> 
+			}</a></br></br>
+  <a href="@routes.Managers.list(0,account)" class="btn btn-primary">All Account</a></br></br>
+  <br><center><span class="glyphicon glyphicon-home" aria-hidden="true"></span><a href="@routes.Managers.details(account)">TRANG CHỦ</a><span class="glyphicon glyphicon-home" aria-hidden="true"></span></center>
+  
+}

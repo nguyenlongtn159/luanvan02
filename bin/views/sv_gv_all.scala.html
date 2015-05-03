@@ -1,0 +1,66 @@
+@(currentPage: com.avaje.ebean.Page[UserAccount],chanvai: UserAccount,chucvu: Long)
+
+@import helper._
+
+@main("Đăng ký") {
+  <script>
+  function del(urlToDelete) {
+    $.ajax ( {
+      url : urlToDelete,
+      type : 'DELETE',
+      success : function ( results ) {
+        // Refresh the page
+        location.reload ( ) ;
+      }
+    } ) ;
+  }
+  </script>
+ 
+  <div id="pagination" class="pagination">
+   @if(currentPage.hasPrev) {
+      <li>
+         <a href="@routes.Students.gv_list(currentPage.getPageIndex - 1,chanvai,chucvu)">
+            &larr;
+         </a>
+      </li>
+   } else {
+     <li class="disabled"><a>&larr;</a></li>
+   }
+     <li class="active">
+        <a>@currentPage.getDisplayXtoYofZ(" - ", " / ")</a>
+     </li>
+   @if(currentPage.hasNext) {
+     <li>
+      <a href="@routes.Students.gv_list(currentPage.getPageIndex + 1,chanvai,chucvu)">&rarr;</a>
+     </li>
+   } else {
+     <li class="disabled"><a>&rarr;</a></li>
+   }
+</div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Tên</th>
+		<th>Đăng ký</th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+    @for(account <- currentPage.getList()) {
+      <tr>
+        <td>@account.id</td>
+        <td>@account.name</td>
+		<td><a onclick="del('@routes.Students.Dangky_gv(chanvai,account,chucvu)')">@if(chanvai.duochuongdan != null && chanvai.duochuongdan.id == account.id){ 
+		        <p>Đã chọn</p> 
+			} else {
+      			<p>Chọn</p> 
+			}</a></td>
+      </tr>
+    }
+    </tbody>
+  </table>
+  <a class="btn" href="@routes.Students.list(0,chanvai)">BACK</a>
+  <br><center><span class="glyphicon glyphicon-home" aria-hidden="true"></span><a href="@routes.Students.details(chanvai)">TRANG CHỦ</a><span class="glyphicon glyphicon-home" aria-hidden="true"></span></center>
+}

@@ -1,0 +1,102 @@
+@(currentPage: com.avaje.ebean.Page[UserAccount],chanvai: UserAccount)
+
+@import helper._
+
+@main("Quản lý") {
+  <div id="pagination" class="pagination">
+    <script type="text/javascript">
+   $(document).ready(function() {
+    $(".element span").text(function(index, text) {
+    return text.replace('3', 'Giáo vụ');
+    });
+    });
+
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+    $(".element span").text(function(index, text) {
+    return text.replace('2', 'Giảng viên');
+    });
+    });
+    </script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+    $(".element span").text(function(index, text) {
+    return text.replace('1', 'Học viên');
+    });
+    });
+    </script>
+     <script>
+      function del(urlToDelete) {
+	  var x = confirm("Bạn chắc chắn muốn xóa?");
+	  if(x){
+      $.ajax({
+      url: urlToDelete,
+      type: 'DELETE',
+      success: function(results) {
+      // Refresh the page
+      location.reload();
+      }
+      });
+	  } else return false;
+      }
+      </script>
+   @if(currentPage.hasPrev) {
+      <li>
+         <a href="@routes.Managers.list(currentPage.getPageIndex - 1,chanvai)">
+            &larr;
+         </a>
+      </li>
+   } else {
+     <li class="disabled"><a>&larr;</a></li>
+   }
+     <li class="active">
+        <a>@currentPage.getDisplayXtoYofZ(" - ", " / ")</a>
+     </li>
+   @if(currentPage.hasNext) {
+     <li>
+      <a href="@routes.Managers.list(currentPage.getPageIndex + 1,chanvai)">&rarr;</a>
+     </li>
+   } else {
+     <li class="disabled"><a>&rarr;</a></li>
+   }
+
+</div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Tài khoản</th>
+        <th>Mật khẩu</th>
+        <th>Họ tên</th>
+          <th>Quyền hạn, chức vụ</th>
+          <th>Số điện thoại</th>
+          <th>Chức danh</th>
+          <th>Nơi công tác</th>
+
+          <th>Hoạt động</th>
+
+        <th>Edit || Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+    @for(account <- currentPage.getList()){
+      <tr>
+        <td><a href="@routes.Managers.show(chanvai,account)">@account.email</a></td>
+        <td><a href="@routes.Managers.show(chanvai,account)">@account.password</a></td>
+        <td><a href="@routes.Managers.show(chanvai,account)">@account.name</a></td>
+          <td class="element"><span><a href="@routes.Managers.show(chanvai,account)">@account.tag.id</a></span></td>
+          <td>@account.sdt</td>
+          <td>@account.chucdanh</td>
+          <td>@account.noicongtac</td>
+        <td><a href="">Xem</a></td>
+		<td> <a href="@routes.Managers.show(chanvai,account)" class="glyphicon glyphicon-edit"> <span class="icon icon-pencil"> </span></a> || <a onclick="del('@routes.Managers.delete(account.email, chanvai)')"><span class="glyphicon glyphicon-trash"></span></a></td>	  
+      </tr>
+}
+</tbody>
+  </table>
+  <a class="btn" href="@routes.Managers.details(chanvai)">BACK</a>
+  
+  <br><center><span class="glyphicon glyphicon-home" aria-hidden="true"></span><a href="@routes.Managers.details(chanvai)">TRANG CHỦ</a><span class="glyphicon glyphicon-home" aria-hidden="true"></span></center>
+ }

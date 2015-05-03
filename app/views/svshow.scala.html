@@ -1,0 +1,21 @@
+@(userForm: Form[UserAccount],name: UserAccount)
+ 
+@import helper._
+@import helper.twitterBootstrap._
+ 
+@main("Thông tin") {
+  <h1>Infomations</h1>
+  @helper.form(CSRF(routes.Students.save(name))) {
+      <input type="hidden" value="@userForm("id").valueOr("")" name="id"/>
+	  <input type="hidden" value="@userForm("name").valueOr("")" name="name"/>
+    <fieldset>
+       <legend>Tài khoản @userForm("name").valueOr("New")</legend>
+	   @helper.inputText(userForm("name"), '_label -> "TÊN")
+	    @helper.inputText(userForm("date"), '_label -> "Date")
+       @helper.inputText(userForm("sdt"), '_label -> "SỐ ĐIỆN THOẠI")
+       @helper.textarea(userForm("description"), '_label -> "THÔNG TIN CHUNG")
+    </fieldset>
+    <input type="submit" class="btn btn-primary" value="Save">
+	<br><center><span class="glyphicon glyphicon-home" aria-hidden="true"></span><a href="@routes.Students.details(name)">TRANG CHỦ</a><span class="glyphicon glyphicon-home" aria-hidden="true"></span></center>
+  }
+}

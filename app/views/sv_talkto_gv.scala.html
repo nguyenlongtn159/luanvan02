@@ -1,0 +1,18 @@
+@(userForm: Form[Message],name: UserAccount,user: UserAccount)
+ 
+@import helper._
+@import helper.twitterBootstrap._
+ 
+@main("Thông báo") {
+  </br>
+  <h1>Thông báo</h1>
+  @helper.form(CSRF(routes.Students.gui(name,user))) {
+    <fieldset>
+	   @helper.inputText(userForm("tieude"), '_label -> "TIÊU ĐỀ")
+       @helper.textarea(userForm("noidung"), '_label -> "NỘI DUNG")
+    </fieldset>
+    <input type="submit" class="btn btn-primary" value="Gửi">
+    <a class="btn" href="@routes.Managers.details(name)">Cancel</a>
+	 <br><center><span class="glyphicon glyphicon-home" aria-hidden="true"></span><a href="@routes.Managers.details(name)">TRANG CHỦ</a><span class="glyphicon glyphicon-home" aria-hidden="true"></span></center>
+  }
+}

@@ -1,0 +1,105 @@
+tags:
+    - !!models.Tag
+        id:     1
+        name:   Sinh viên
+ 
+    - !!models.Tag
+        id:     2
+        name:   Giảng viên
+ 
+    - !!models.Tag
+        id:     3
+        name:   Giáo vụ
+
+
+user_accounts:
+    - !!models.UserAccount
+        email:  sinhvien1@example.com
+        password: alice
+        chucvu:    1
+        khoa:     1
+        name:    Truongnh
+        cmon:       0
+
+    - !!models.UserAccount
+        email:  sinhvien2@example.com
+        password: alice
+        chucvu:    1
+        khoa:     1
+        name: Tratn
+        cmon:       0
+
+    - !!models.UserAccount
+        email:  sinhvien3@example.com
+        password: alice
+        chucvu:    1
+        khoa:     1
+        name:    Hieunq
+        cmon:      0
+
+    - !!models.UserAccount
+        email:  sinhvien4@example.com
+        password: alice
+        chucvu:    1
+        khoa:     1
+        name:    Mylt
+        cmon:        0
+
+    - !!models.UserAccount
+        email:  sinhvien5@example.com
+        password: alice
+        chucvu:    1
+        khoa:     1
+        name:    Minhvq
+        cmon:       0
+
+    - !!models.UserAccount
+        email:  giangvien1@example.com
+        password: alice
+        chucvu:    2
+        khoa:     1
+        name:    Chiendm
+        cmon:       1
+
+    - !!models.UserAccount
+        email:  giangvien2@example.com
+        password: alice
+        chucvu:    2
+        khoa:     1
+        name:    LanAnhnt
+        cmon:       1
+
+    - !!models.UserAccount
+        email:  giangvien3@example.com
+        password: alice
+        chucvu:    2
+        khoa:    1
+        name:    Doba
+        cmon:      2
+
+    - !!models.UserAccount
+        email:  giaovu1@example.com
+        password: alice
+        chucvu:    3
+        khoa:     1
+        name:     Namlp
+        cmon:      0
+
+
+detai:
+    - !!models.Detai
+        id:    1
+        name:  Mạng máy tính
+
+    - !!models.Detai
+        id:    2
+        name: Công nghệ PM
+
+    - !!models.Detai
+        id:   3
+        name:  Cơ sở dữ liệu
+
+    - !!models.Detai
+        id:   4
+        name:   Đồ họa máy tính
+

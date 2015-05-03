@@ -1,0 +1,35 @@
+@(mMessage: List[Message],account: UserAccount)
+
+@import helper._
+ 
+@main("Tiến độ") {
+  <h2>@account.name</h2>
+  <a href="@routes.Students.newMessage(account)" class="btn btn-primary">Trao đổi với giảng viên @account.duochuongdan.name</a></br></br>
+  <h4>Hợp thư đến</h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Tiêu đề</th>
+		<th>Người gửi</th>
+        <th>Ngày nhận</th>
+		<th></th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+    @for(message <- mMessage) {
+      <tr>
+        <td>@message.tieude</td>
+		<th>@message.nguoigui</td>
+        <td>@message.ngaygui</td>
+		<td><a href="@routes.Students.show_msg(account,message)">Xem</a></td>
+      </tr>
+    }
+    </tbody>
+  </table>
+  @if(mMessage.isEmpty()){
+  <h6> Không có tin nhắn</h6>
+  }else{
+  <h6> có tin nhắn</h6>
+  }
+}

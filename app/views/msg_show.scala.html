@@ -1,0 +1,13 @@
+@(user: UserAccount,msg: Message)
+@import helper._
+
+@main("Message") {
+   <h3 color="#e61a5f">Tiêu đề: @msg.tieude</h3>
+   <h5>Người gủi: @msg.nguoigui </h5><br><br>
+   <h6>@msg.noidung</h6>
+   @if(user.chucvu==2){
+  <a href="@routes.Teachers.newMessage(user,msg.email)" class="btn btn-primary">Phản hồi</a></br></br>
+  }else{
+  <h6></h6>
+  }
+}

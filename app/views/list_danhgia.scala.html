@@ -1,0 +1,29 @@
+@(mMessage: List[Danh_Gia],user: UserAccount, account: UserAccount)
+
+@import helper._
+ 
+@main("Đánh giá") {
+  <h4>Đánh giá tiến độ học viên</h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Lần đánh giá</th>
+		<th>Ngày cập nhật</th>
+		<th>Sửa đổi</th>
+		<th></th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+    @for(message <- mMessage) {
+      <tr>
+        <td>@message.tieude</td>
+		<td>@message.time</td>
+		<th><a href="@routes.Teachers.showDg(user, account, message)">Write</a></td>
+      </tr>
+    }
+    </tbody>
+  </table>
+  <a href="@routes.Teachers.newDg(user, account)" class="btn btn-primary">Đánh giá mới</a></br></br>
+  <a href="@routes.Teachers.list(0, user)" class="btn btn-primary">Back</a></br></br>
+}

@@ -1,0 +1,33 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET  /login        controllers.Application.login()
+POST /authenticate controllers.Application.authenticate()
+GET  /giao_vu/:name/       controllers.Managers.details(name: models.UserAccount)
+GET  /giang_vien/:name/       controllers.Teachers.details(name: models.UserAccount)
+GET  /sinh_vien/:name/       controllers.Students.details(name: models.UserAccount)
+GET  /giao_vu/:name/accounts           controllers.Managers.list(page: Integer?=0,name: models.UserAccount)
+POST /giao_vu/:name/gui           controllers.Managers.gui(name: models.UserAccount)
+POST /giao_vu/:name           controllers.Managers.save(name: models.UserAccount)
+DELETE /giao_vu             controllers.Managers.Start()
+GET  /giao_vu/:name/new        controllers.Managers.newAccount(name: models.UserAccount)
+GET  /giao_vu/:name/message        controllers.Managers.newMessage(name: models.UserAccount)
+GET  /giao_vu/:name/:names       controllers.Managers.show(name: models.UserAccount,names: models.UserAccount)
+POST /sinh_vien/:name           controllers.Students.save(name: models.UserAccount)
+DELETE  /sinh_vien/:name/:names          controllers.Students.Dangky(name: models.UserAccount, names: models.Detai)
+DELETE  /sinh_vien/:name/:names/          controllers.Students.Dangky_gv(name: models.UserAccount, names: models.UserAccount,chucvu: Long?=0)
+GET  /sinh_vien/:name/hoat_dong        controllers.Students.list(page: Integer?=0,name: models.UserAccount)
+GET  /sinh_vien/:name/giao_vien_huong_dan       controllers.Students.gv_list(page: Integer?=0,name: models.UserAccount,chuyenmon: Long?=0)
+GET  /sinh_vien/:name/bao_ve       controllers.Students.modelsList(name: models.UserAccount)
+GET  /sinh_vien/:name/:names       controllers.Students.show(name: models.UserAccount,names: models.UserAccount)
+GET /logout        controllers.Application.logout()
+DELETE  /Managers/:name  controllers.Managers.delete(email: String, name: models.UserAccount)
+POST          /giang_vien/:name                           controllers.Teachers.save(name: models.UserAccount)
+GET           /giang_vien/:name/hoat_dong                 controllers.Teachers.list(page: Integer?=0,name: models.UserAccount)
+GET           /giang_vien/:name/:names                    controllers.Teachers.show(name: models.UserAccount,names: models.UserAccount)
